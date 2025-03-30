@@ -41,10 +41,7 @@ impl Solution {
 
 #[cfg(test)]
 mod tests {
-    use std::str::FromStr;
-
     use super::*;
-
     #[test]
     fn test_swap_pairs() {
         assert_eq!(
