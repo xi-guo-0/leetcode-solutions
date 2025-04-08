@@ -23,23 +23,21 @@ impl TreeNode {
 struct Solution;
 
 impl Solution {
-    pub fn get_minimum_difference(root: Option<Rc<RefCell<TreeNode>>>) -> i32 {
-        let mut min = std::i32::MAX;
-        let mut prev = None;
-        Self::inorder(root, &mut min, &mut prev);
-        min
+    pub fn sum_of_left_leaves(root: Option<Rc<RefCell<TreeNode>>>) -> i32 {
+        Self::sum_of_left_leaves_helper(root, false)
     }
 
-    fn inorder(node: Option<Rc<RefCell<TreeNode>>>, min: &mut i32, prev: &mut Option<i32>) {
-        if let Some(node) = node {
-            let node = node.as_ref().borrow();
-
-            Self::inorder(node.left.clone(), min, prev);
-            if let Some(pr) = *prev {
-                *min = std::cmp::min(*min, node.val - pr);
+    fn sum_of_left_leaves_helper(root: Option<Rc<RefCell<TreeNode>>>, is_left: bool) -> i32 {
+        if let Some(node) = root {
+            let node = node.borrow();
+            if node.left.is_none() && node.right.is_none() && is_left {
+                node.val
+            } else {
+                Self::sum_of_left_leaves_helper(node.left.clone(), true)
+                    + Self::sum_of_left_leaves_helper(node.right.clone(), false)
             }
-            *prev = Some(node.val);
-            Self::inorder(node.right.clone(), min, prev);
+        } else {
+            0
         }
     }
 }
@@ -79,11 +77,11 @@ fn leetcode_input_to_tree(input: &[Option<i32>]) -> Option<Rc<RefCell<TreeNode>>
 mod tests {
     use super::*;
     #[test]
-    fn test_get_minimum_difference() {
-        assert_eq!(Solution::get_minimum_difference(tree![4, 2, 6, 1, 3]), 1);
+    fn test_sum_of_left_leaves() {
         assert_eq!(
-            Solution::get_minimum_difference(tree![1, 0, 48, null, null, 12, 49]),
-            1
+            Solution::sum_of_left_leaves(tree![3, 9, 20, null, null, 15, 7]),
+            24
         );
+        assert_eq!(Solution::sum_of_left_leaves(tree![1]), 0);
     }
 }
