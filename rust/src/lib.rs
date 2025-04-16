@@ -89,6 +89,7 @@ mod p1922;
 mod p2033;
 mod p2140;
 mod p2179;
+mod p2537;
 mod p2551;
 mod p2843;
 mod p2873;
