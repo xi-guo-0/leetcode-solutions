@@ -84,6 +84,7 @@ mod p0881;
 mod p0950;
 mod p0988;
 mod p0992;
+mod p1007;
 mod p1123;
 mod p1295;
 mod p1399;
