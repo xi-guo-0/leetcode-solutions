@@ -92,6 +92,7 @@ mod p1295;
 mod p1399;
 mod p1534;
 mod p1863;
+mod p1920;
 mod p1922;
 mod p2033;
 mod p2071;
