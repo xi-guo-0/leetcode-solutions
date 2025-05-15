@@ -15,3 +15,10 @@ macro_rules! tree {
         }
     };
 }
+
+#[macro_export]
+macro_rules! svec {
+    ($($s:expr),*) => {
+        vec![$($s.to_string()),*]
+    };
+}
